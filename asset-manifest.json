@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.js": "/my-app/static/js/main.8ad34f0d.chunk.js",
-    "main.js.map": "/my-app/static/js/main.8ad34f0d.chunk.js.map",
-    "runtime-main.js": "/my-app/static/js/runtime-main.f8b2427b.js",
-    "runtime-main.js.map": "/my-app/static/js/runtime-main.f8b2427b.js.map",
-    "static/js/2.0651a24d.chunk.js": "/my-app/static/js/2.0651a24d.chunk.js",
-    "static/js/2.0651a24d.chunk.js.map": "/my-app/static/js/2.0651a24d.chunk.js.map",
-    "index.html": "/my-app/index.html",
-    "static/js/2.0651a24d.chunk.js.LICENSE.txt": "/my-app/static/js/2.0651a24d.chunk.js.LICENSE.txt"
+    "main.js": "/react-board-test/static/js/main.8ad34f0d.chunk.js",
+    "main.js.map": "/react-board-test/static/js/main.8ad34f0d.chunk.js.map",
+    "runtime-main.js": "/react-board-test/static/js/runtime-main.89f51fed.js",
+    "runtime-main.js.map": "/react-board-test/static/js/runtime-main.89f51fed.js.map",
+    "static/js/2.dd849f32.chunk.js": "/react-board-test/static/js/2.dd849f32.chunk.js",
+    "static/js/2.dd849f32.chunk.js.map": "/react-board-test/static/js/2.dd849f32.chunk.js.map",
+    "index.html": "/react-board-test/index.html",
+    "static/js/2.dd849f32.chunk.js.LICENSE.txt": "/react-board-test/static/js/2.dd849f32.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.f8b2427b.js",
-    "static/js/2.0651a24d.chunk.js",
+    "static/js/runtime-main.89f51fed.js",
+    "static/js/2.dd849f32.chunk.js",
     "static/js/main.8ad34f0d.chunk.js"
   ]
 }
