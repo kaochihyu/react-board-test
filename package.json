@@ -22,7 +22,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "https://kaochihyu.github.io/react-board-test",
+  "homepage": "https://kaochihyu.github.io/redux-todo-list",
   "eslintConfig": {
     "extends": [
       "react-app",
