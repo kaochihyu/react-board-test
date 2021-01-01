@@ -1,8 +1,7 @@
-import { useSelector, useDispatch } from "react-redux";
-import { selectTodos } from "../../redux/selectTodos";
-import { useState, Fragment } from "react";
-import styled from "styled-components";
-import { addTodo } from "../../redux/actions";
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import styled from 'styled-components';
+import { addTodo } from '../../redux/actions';
 
 const AddItem = styled.div`
   margin: 16px 0;
@@ -41,23 +40,23 @@ const AddButton = styled.div`
   }
 `;
 
-// dumb component/component，不知道 redux 的存在
+// 用 dispatch 就知道 redux 的存在了
 export default function AddTodo() {
   const dispatch = useDispatch();
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
 
   const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      if (!value) return 
+    if (e.key === 'Enter') {
+      if (!value) return;
       dispatch(addTodo(value));
-      setValue("");
+      setValue('');
     }
   };
 
   const handleAddButtonClick = () => {
-    if (!value) return 
+    if (!value) return;
     dispatch(addTodo(value));
-    setValue("");
+    setValue('');
   };
 
   return (

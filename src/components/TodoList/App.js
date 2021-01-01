@@ -79,10 +79,9 @@ function App() {
 
   const [todos, setTodos] = useState(() => {
     let todoData = window.localStorage.getItem('todos') || '';
-    console.log(todoData.length); // 這裡有點怪，甚麼都沒有是 2，新增一個東西變 25 (之後每重新整理就+ 24)
     return todoData ? JSON.parse(todoData) : []
   });
-
+  console.log(todos.length)
   const { value, setValue, handleChange } = useInput();
 
   useEffect(() => {
@@ -123,7 +122,17 @@ function App() {
     setTodos(todos.filter(todo => todo.id !== deletedId));
   };
 
-  const handleClearAll = () => {
+  const handleCompletedAll = () => {
+    setTodos(todos.map(todo => {
+      return {
+        ...todo, 
+        isDone: true
+      }
+    })
+    );
+  };
+
+  const handleClearCompleted = () => {
     setTodos(todos.filter(todo => todo.isDone !== true));
   };
 
@@ -153,7 +162,7 @@ function App() {
   const FILTER_MAP = {
     All: () => true,
     Active: todo => !todo.isDone,
-    IsDone: todo => todo.isDone,
+    Completed: todo => todo.isDone,
   };
 
   const FILTER_NAMES = Object.keys(FILTER_MAP);
@@ -190,7 +199,11 @@ function App() {
         ))}
       </Itemslist>
       <Line />
-      <FilterButton filterList={filterList} handleClearAll={handleClearAll} />
+      <FilterButton 
+        filterList={filterList} 
+        handleClearCompleted={handleClearCompleted} 
+        handleCompletedAll={handleCompletedAll} 
+      />
     </Container>
   );
 }

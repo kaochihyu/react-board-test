@@ -105,8 +105,6 @@ export default function Todo({
 }) {
   const [isEditing, setEditing] = useState(false);
   const [newContent, setNewContent] = useState('');
-  // const editFieldRef = useRef(null);
-  // const editButtonRef = useRef(null);
 
   const handleEditChange = (e) => {
     setNewContent(e.target.value);
@@ -155,7 +153,7 @@ export default function Todo({
       <TodoContent isDone={$isDone}>
         <Checkbox
           onClick={handleTogglerClick}
-          defaultChecked={$isDone}
+          checked={$isDone}
           type="checkbox"
           name="item"
           id={todoId}
@@ -173,12 +171,6 @@ export default function Todo({
       </Btns>
     </StyledItem>
   );
-
-  // useEffect(() => {
-  //   if (isEditing) {
-  //     editFieldRef.current.focus()
-  //   }
-  // }, [isEditing])
 
   return isEditing ? editingTemplate : viewTemplate;
 }

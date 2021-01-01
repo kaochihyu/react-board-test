@@ -1,8 +1,12 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { selectTodos } from '../../redux/selectTodos';
-import { useState, Fragment } from "react";
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { changeTodo, editingTodo, deleteTodo, toggleTodo } from "../../redux/actions";
+import { useDispatch } from 'react-redux';
+import {
+  changeTodo,
+  editingTodo,
+  deleteTodo,
+  toggleTodo,
+} from '../../redux/actions';
 
 const StyledItem = styled.div`
   margin-bottom: 20px;
@@ -65,7 +69,7 @@ const Btn = styled.div`
   font-size: 14px;
   cursor: default;
   margin-left: 10px;
-  font-family: "微軟正黑體";
+  font-family: '微軟正黑體';
 
   &:hover {
     color: #333;
@@ -97,47 +101,45 @@ export default function Template({ todo }) {
   const viewTemplate = (
     <StyledItem>
       <TodoContent>
-        <Checkbox type="checkbox" id={todo.id} checked={todo.completed} onChange={() => dispatch(toggleTodo(todo.id))}/>
+        <Checkbox
+          type="checkbox"
+          id={todo.id}
+          checked={todo.completed}
+          onChange={() => dispatch(toggleTodo(todo.id))}
+        />
         {todo.name}
       </TodoContent>
       <Btns>
-        <Btn onClick={() => dispatch(editingTodo(todo.id))}>
-          Edit
-        </Btn>
-        <Btn onClick={() => dispatch(deleteTodo(todo.id))}>
-          Delete
-        </Btn>
+        <Btn onClick={() => dispatch(editingTodo(todo.id))}>Edit</Btn>
+        <Btn onClick={() => dispatch(deleteTodo(todo.id))}>Delete</Btn>
       </Btns>
     </StyledItem>
-  )
+  );
 
   const editingTemplate = (
     <StyledItem>
       <TodoContent>
-        <input id={todo.id} onChange={e => setNewContent(e.target.value)} placeholder={todo.name} />
+        <input
+          id={todo.id}
+          onChange={e => setNewContent(e.target.value)}
+          placeholder={todo.name}
+        />
       </TodoContent>
       <Btns>
-        <Btn onClick={
-          () => {
+        <Btn
+          onClick={() => {
             if (!newContent) {
-              dispatch(editingTodo(todo.id))
+              dispatch(editingTodo(todo.id));
             } else {
-              dispatch(changeTodo(todo.id, newContent))
+              dispatch(changeTodo(todo.id, newContent));
             }
-          }
-        }>
+          }}
+        >
           save
         </Btn>
-        <Btn onClick={() => dispatch(editingTodo(todo.id))}>
-          cancel
-        </Btn>
+        <Btn onClick={() => dispatch(editingTodo(todo.id))}>cancel</Btn>
       </Btns>
     </StyledItem>
-  )
-  return (
-    todo.editing ? editingTemplate : viewTemplate
-  )
+  );
+  return todo.editing ? editingTemplate : viewTemplate;
 }
-
-
-

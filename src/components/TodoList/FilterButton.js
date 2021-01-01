@@ -26,11 +26,12 @@ const FilterBtns = styled.div`
   display: flex;
 `;
 
-export default function FilterButton({ handleClearAll, filterList }) {
+export default function FilterButton({ handleCompletedAll, handleClearCompleted, filterList }) {
   return (
     <Btns>
       <ClearAllBtns>
-        <BottomBtn onClick={handleClearAll}>清除完成項目</BottomBtn>
+        <BottomBtn onClick={handleCompletedAll}>Completed All</BottomBtn>
+        <BottomBtn onClick={handleClearCompleted}>Clear Completed</BottomBtn>
       </ClearAllBtns>
       <FilterBtns>{filterList}</FilterBtns>
     </Btns>
@@ -38,6 +39,7 @@ export default function FilterButton({ handleClearAll, filterList }) {
 }
 
 FilterButton.propTypes = {
-  handleClearAll: PropTypes.func.isRequired,
+  handleCompleteAll: PropTypes.func.isRequired,
+  handleClearCompleted: PropTypes.func.isRequired,
   filterList: PropTypes.arrayOf(PropTypes.string),
 };

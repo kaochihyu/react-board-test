@@ -1,4 +1,13 @@
-import { ADD_TODO, DELETE_TODO, TOGGLE_TODO, COMPLETE_ALL, CLEAR_COMPLETED, CHANGE_STATUS, EDITING_TODO, CHANGE_TODO } from "./actionTypes";
+import {
+  ADD_TODO,
+  DELETE_TODO,
+  TOGGLE_TODO,
+  COMPLETE_ALL,
+  CLEAR_COMPLETED,
+  CHANGE_STATUS,
+  EDITING_TODO,
+  CHANGE_TODO,
+} from "./actionTypes";
 
 // action creator，不用每次都打很多字
 export function addTodo(name) {
@@ -23,30 +32,30 @@ export function toggleTodo(id) {
   return {
     type: TOGGLE_TODO,
     payload: {
-      id, 
-    }
-  }
+      id,
+    },
+  };
 }
 
 export function completeAll() {
   return {
     type: COMPLETE_ALL,
-  }
+  };
 }
 
 export function clearCompleted() {
   return {
     type: CLEAR_COMPLETED,
-  }
+  };
 }
 
 export function changeStatus(filterValue) {
   return {
     type: CHANGE_STATUS,
     payload: {
-      filterValue
-    }
-  }
+      filterValue,
+    },
+  };
 }
 
 export function editingTodo(id) {

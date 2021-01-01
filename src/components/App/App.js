@@ -1,12 +1,14 @@
-import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { createSelector } from 'reselect';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { selectTodos } from "../../redux/selectTodos";
-import { selectFilters } from "../../redux/selectFilters";
-import AddTodo from "./AddTodo";
-import Template from "./Template";
-import { deleteTodo, addTodo, toggleTodo, completeAll, clearCompleted, changeStatus, editingTodo, changeTodo } from "../../redux/actions";
+import { selectTodos, selectFilters, rateOfDone, selectCompleteTodos, selectActiveTodos } from '../../redux/selectors';
+import AddTodo from './AddTodo';
+import Template from './Template';
+import {
+  completeAll,
+  clearCompleted,
+  changeStatus,
+} from '../../redux/actions';
 
 const Container = styled.div`
   width: 400px;
@@ -19,7 +21,7 @@ const Container = styled.div`
 `;
 
 const Title = styled.h4`
-  font-family: "Mukta", sans-serif;
+  font-family: 'Mukta', sans-serif;
   font-weight: 400;
   font-size: 20px;
   color: #333;
@@ -64,94 +66,61 @@ const Button = styled.div`
   &:hover {
     color: #333;
   }
-`
-
-const selectNumOfDoneTodos = createSelector(
-  selectTodos,
-  (todos) => todos.filter((todo) => todo.completed).length
-)
-
-const selectNumOfAllTodos = createSelector(
-  selectTodos,
-  (todos) => todos.length
-)
-
-const rateOfDone = createSelector(
-  selectNumOfDoneTodos,
-  selectNumOfAllTodos,
-  (done, all) => Math.floor((Number(done) /Number(all)) * 100)
-)
-
-const selectCompleteTodos = createSelector(
-  selectTodos,
-  (todos) => todos.filter((todo) => todo.completed)
-)
-
-const selectActiveTodos = createSelector(
-  selectTodos,
-  (todos) => todos.filter((todo) => !todo.completed)
-)
+`;
 
 const DoneTodosCounter = () => {
-  const rateOfDoneTodos = useSelector(rateOfDone)
-  return <span>{rateOfDoneTodos}</span>
-}
-
+  const rateOfDoneTodos = useSelector(rateOfDone);
+  return <span>{rateOfDoneTodos}</span>;
+};
 
 function App() {
   // useSelector(store => store.todos.todos)
   const todos = useSelector(selectTodos);
   const filters = useSelector(selectFilters);
   const dispatch = useDispatch();
-  const [newContent, setNewContent] = useState('');
 
   const ActiveTodos = () => {
-    const activeTodos = useSelector(selectActiveTodos)
-    return activeTodos.map((todo) => <Template todo={todo} />)
-  }
+    const activeTodos = useSelector(selectActiveTodos);
+    return activeTodos.map(todo => <Template todo={todo} />);
+  };
 
   const CompletedTodos = () => {
-    const completedTodos = useSelector(selectCompleteTodos)
-    return completedTodos.map((todo) => <Template todo={todo} />)
-  }
+    const completedTodos = useSelector(selectCompleteTodos);
+    return completedTodos.map(todo => <Template todo={todo} />);
+  };
 
   return (
     <Container>
       <Title>Todo List</Title>
       <AddTodo />
       <Itemslist>
-        {filters.status === 'all' 
-          && todos.map((todo) => <Template todo={todo} /> )
-        }
-        {filters.status === 'completed' 
-          && <CompletedTodos />
-        }
-        {filters.status === 'active' 
-          && <ActiveTodos />
-        }
+        {filters.status === 'all' && todos.map(todo => <Template todo={todo} />)}
+        {filters.status === 'completed' && <CompletedTodos />}
+        {filters.status === 'active' && <ActiveTodos />}
       </Itemslist>
-      {todos.length > 0 && <RateOfDone>Achievement : <DoneTodosCounter /> %</RateOfDone>}
+      {todos.length > 0 && (
+        <RateOfDone>
+          Achievement : 
+          <DoneTodosCounter /> 
+          %
+        </RateOfDone>
+      )}
       <Line />
       <Btns>
-        <Button onClick={() => dispatch(completeAll())}>
-          Complete All
-        </Button>
+        <Button onClick={() => dispatch(completeAll())}>Complete All</Button>
         <Button onClick={() => dispatch(clearCompleted())}>
           Clear Completed
         </Button>
         <FilterBtns>
-          <Button onClick={() => dispatch(changeStatus('all'))}>
-            All
-          </Button>
+          <Button onClick={() => dispatch(changeStatus('all'))}>All</Button>
           <Button onClick={() => dispatch(changeStatus('active'))}>
             Active
           </Button>
           <Button onClick={() => dispatch(changeStatus('completed'))}>
             Completed
-          </Button>  
+          </Button>
         </FilterBtns>
       </Btns>
-      
     </Container>
   );
 }
